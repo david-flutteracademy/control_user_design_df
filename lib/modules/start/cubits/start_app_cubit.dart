@@ -8,7 +8,14 @@ class StartAppCubit extends Cubit<StartAppState> {
     emit(state.copyWith(isLogged: false));
   }
 
-  Future<void> valiteUserTrue() async {
-    emit(state.copyWith(isLogged: true));
+  Future<void> valiteUserTrue({
+    required String email,
+    required String password,
+  }) async {
+    if (email.isNotEmpty && password.isNotEmpty) {
+      emit(state.copyWith(isLogged: true));
+    } else {
+      emit(state.copyWith(isLogged: false));
+    }
   }
 }

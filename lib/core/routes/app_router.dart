@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:control_user_design_df/core/locator/locator.dart';
 import 'package:control_user_design_df/modules/auth/pages/login_page.dart';
+import 'package:control_user_design_df/modules/home/pages/home_details_page.dart';
 import 'package:control_user_design_df/modules/home/pages/home_page.dart';
 import 'package:control_user_design_df/modules/start/cubits/start_app_cubit.dart';
 import 'package:control_user_design_df/modules/start/pages/start_page.dart';
@@ -11,12 +12,13 @@ import 'package:go_router/go_router.dart';
 enum AppRoutes {
   startApp,
   home,
+  homeDetails,
   login,
 }
 
 final useBloc = locator<StartAppCubit>();
 
-final List<String> routesWithAuth = ['/home'];
+final List<String> routesWithAuth = ['/home', '/home/details'];
 
 final List<String> routesWithoutAuth = ['/login'];
 
@@ -51,7 +53,17 @@ final goRouterConfiguration = GoRouter(
         name: AppRoutes.home.name,
         builder: (context, state) {
           return const HomePage();
-        }),
+        },
+        routes: [
+          GoRoute(
+              path: 'details',
+              name: AppRoutes.homeDetails.name,
+              builder: (context, state) {
+                return HomeDetailsPage(
+                  homeObject: state.extra as HomeDetailsPageObject,
+                );
+              }),
+        ]),
   ],
 );
 
