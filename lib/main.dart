@@ -1,6 +1,9 @@
+import 'package:control_user_design_df/core/locator/locator.dart';
+import 'package:control_user_design_df/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  setUpLocator();
   runApp(const MainApp());
 }
 
@@ -9,12 +12,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      routerConfig: goRouterConfiguration,
     );
   }
 }
