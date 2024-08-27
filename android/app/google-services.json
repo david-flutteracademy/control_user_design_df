@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "125912347323",
+    "project_id": "david-flutteracademy-dev",
+    "storage_bucket": "david-flutteracademy-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125912347323:android:b7a8305530e980049fef9e",
+        "android_client_info": {
+          "package_name": "com.example.control_user_design_df"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPIjVOXsaolmiNvYRyu5paNCdGT9vQcXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
