@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$StartAppState {
   bool? get isLogged => throw _privateConstructorUsedError;
+  UserFlutterDto? get myUser => throw _privateConstructorUsedError;
   bool get needTheme => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $StartAppStateCopyWith<$Res> {
           StartAppState value, $Res Function(StartAppState) then) =
       _$StartAppStateCopyWithImpl<$Res, StartAppState>;
   @useResult
-  $Res call({bool? isLogged, bool needTheme});
+  $Res call({bool? isLogged, UserFlutterDto? myUser, bool needTheme});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$StartAppStateCopyWithImpl<$Res, $Val extends StartAppState>
   @override
   $Res call({
     Object? isLogged = freezed,
+    Object? myUser = freezed,
     Object? needTheme = null,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +56,10 @@ class _$StartAppStateCopyWithImpl<$Res, $Val extends StartAppState>
           ? _value.isLogged
           : isLogged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      myUser: freezed == myUser
+          ? _value.myUser
+          : myUser // ignore: cast_nullable_to_non_nullable
+              as UserFlutterDto?,
       needTheme: null == needTheme
           ? _value.needTheme
           : needTheme // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$StartAppStateImplCopyWith<$Res>
       __$$StartAppStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? isLogged, bool needTheme});
+  $Res call({bool? isLogged, UserFlutterDto? myUser, bool needTheme});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$StartAppStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLogged = freezed,
+    Object? myUser = freezed,
     Object? needTheme = null,
   }) {
     return _then(_$StartAppStateImpl(
@@ -92,6 +99,10 @@ class __$$StartAppStateImplCopyWithImpl<$Res>
           ? _value.isLogged
           : isLogged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      myUser: freezed == myUser
+          ? _value.myUser
+          : myUser // ignore: cast_nullable_to_non_nullable
+              as UserFlutterDto?,
       needTheme: null == needTheme
           ? _value.needTheme
           : needTheme // ignore: cast_nullable_to_non_nullable
@@ -103,17 +114,20 @@ class __$$StartAppStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StartAppStateImpl implements _StartAppState {
-  const _$StartAppStateImpl({this.isLogged, this.needTheme = true});
+  const _$StartAppStateImpl(
+      {this.isLogged, this.myUser, this.needTheme = true});
 
   @override
   final bool? isLogged;
+  @override
+  final UserFlutterDto? myUser;
   @override
   @JsonKey()
   final bool needTheme;
 
   @override
   String toString() {
-    return 'StartAppState(isLogged: $isLogged, needTheme: $needTheme)';
+    return 'StartAppState(isLogged: $isLogged, myUser: $myUser, needTheme: $needTheme)';
   }
 
   @override
@@ -123,12 +137,14 @@ class _$StartAppStateImpl implements _StartAppState {
             other is _$StartAppStateImpl &&
             (identical(other.isLogged, isLogged) ||
                 other.isLogged == isLogged) &&
+            const DeepCollectionEquality().equals(other.myUser, myUser) &&
             (identical(other.needTheme, needTheme) ||
                 other.needTheme == needTheme));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLogged, needTheme);
+  int get hashCode => Object.hash(runtimeType, isLogged,
+      const DeepCollectionEquality().hash(myUser), needTheme);
 
   @JsonKey(ignore: true)
   @override
@@ -138,11 +154,15 @@ class _$StartAppStateImpl implements _StartAppState {
 }
 
 abstract class _StartAppState implements StartAppState {
-  const factory _StartAppState({final bool? isLogged, final bool needTheme}) =
-      _$StartAppStateImpl;
+  const factory _StartAppState(
+      {final bool? isLogged,
+      final UserFlutterDto? myUser,
+      final bool needTheme}) = _$StartAppStateImpl;
 
   @override
   bool? get isLogged;
+  @override
+  UserFlutterDto? get myUser;
   @override
   bool get needTheme;
   @override

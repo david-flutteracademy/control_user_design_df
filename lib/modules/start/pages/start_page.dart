@@ -10,7 +10,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<StartAppCubit, StartAppState>(
-        bloc: locator<StartAppCubit>()..valiteUser(),
+        bloc: locator<StartAppCubit>()..authStateChangesFirebase(),
         builder: (context, state) {
           return const Scaffold(
             body: Center(
