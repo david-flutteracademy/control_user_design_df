@@ -9,13 +9,19 @@ class CharacterApiServices {
       var httpsUri = Uri(
         scheme: 'https',
         host: APIRickMorty.baseUrl,
-        path: '/api/character/',
+        path: '/api/charactersd/',
         queryParameters: {
           'page': page.toString(),
         },
       );
 
-      await http.get(httpsUri).then((response) {
+      await http
+          .get(
+        httpsUri,
+        // headers: {},
+        // body: {'page': page}
+      )
+          .then((response) {
         myResponse = response;
       });
 

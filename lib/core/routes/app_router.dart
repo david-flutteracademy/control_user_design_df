@@ -4,6 +4,7 @@ import 'package:control_user_design_df/core/locator/locator.dart';
 import 'package:control_user_design_df/modules/auth/pages/login_page.dart';
 import 'package:control_user_design_df/modules/home/pages/home_details_page.dart';
 import 'package:control_user_design_df/modules/home/pages/home_page.dart';
+import 'package:control_user_design_df/modules/rick_morty/ui/pages/home_rick_morty_page.dart';
 import 'package:control_user_design_df/modules/start/cubits/start_app_cubit.dart';
 import 'package:control_user_design_df/modules/start/pages/start_page.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,16 @@ enum AppRoutes {
   home,
   homeDetails,
   login,
+  homeRickMorty,
 }
 
 final useBloc = locator<StartAppCubit>();
 
-final List<String> routesWithAuth = ['/home', '/home/details'];
+final List<String> routesWithAuth = [
+  '/home',
+  '/home/details',
+  '/homeRickMorty'
+];
 
 final List<String> routesWithoutAuth = ['/login'];
 
@@ -31,7 +37,7 @@ final goRouterConfiguration = GoRouter(
       return '/login';
     } else if (useBloc.state.isLogged == true &&
         !routesWithAuth.contains(state.matchedLocation)) {
-      return '/home';
+      return '/homeRickMorty';
     }
     return null;
   },
@@ -47,6 +53,12 @@ final goRouterConfiguration = GoRouter(
         name: AppRoutes.login.name,
         builder: (context, state) {
           return const LoginPage();
+        }),
+    GoRoute(
+        path: '/homeRickMorty',
+        name: AppRoutes.homeRickMorty.name,
+        builder: (context, state) {
+          return const HomeRickMortyPage();
         }),
     GoRoute(
         path: '/home',

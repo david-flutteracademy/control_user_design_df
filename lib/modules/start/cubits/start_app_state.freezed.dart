@@ -137,14 +137,13 @@ class _$StartAppStateImpl implements _StartAppState {
             other is _$StartAppStateImpl &&
             (identical(other.isLogged, isLogged) ||
                 other.isLogged == isLogged) &&
-            const DeepCollectionEquality().equals(other.myUser, myUser) &&
+            (identical(other.myUser, myUser) || other.myUser == myUser) &&
             (identical(other.needTheme, needTheme) ||
                 other.needTheme == needTheme));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLogged,
-      const DeepCollectionEquality().hash(myUser), needTheme);
+  int get hashCode => Object.hash(runtimeType, isLogged, myUser, needTheme);
 
   @JsonKey(ignore: true)
   @override
