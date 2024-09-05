@@ -1,9 +1,11 @@
 import 'package:control_user_design_df/core/locator/locator.dart';
 import 'package:control_user_design_df/core/routes/app_router.dart';
+import 'package:control_user_design_df/core/store/sotore_redux.dart';
 import 'package:control_user_design_df/modules/home/pages/home_details_page.dart';
 import 'package:control_user_design_df/modules/rick_morty/data/repositories/character_repository.dart';
 import 'package:control_user_design_df/modules/rick_morty/data/services/character_api_service.dart';
 import 'package:control_user_design_df/modules/start/cubits/start_app_cubit.dart';
+import 'package:control_user_design_df/modules/start/redux/start_app_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +17,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          locator<StartAppCubit>().signOut();
+          startUpStore.dispatch(SignOutAction());
         },
       ),
       appBar: AppBar(),

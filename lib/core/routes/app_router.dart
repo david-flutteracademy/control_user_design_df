@@ -1,14 +1,16 @@
 import 'dart:async';
 
 import 'package:control_user_design_df/core/locator/locator.dart';
+import 'package:control_user_design_df/core/store/sotore_redux.dart';
 import 'package:control_user_design_df/modules/auth/pages/login_page.dart';
 import 'package:control_user_design_df/modules/home/pages/home_details_page.dart';
 import 'package:control_user_design_df/modules/home/pages/home_page.dart';
 import 'package:control_user_design_df/modules/rick_morty/ui/pages/home_rick_morty_page.dart';
-import 'package:control_user_design_df/modules/start/cubits/start_app_cubit.dart';
+import 'package:control_user_design_df/modules/start/cubits/start_app_state.dart';
 import 'package:control_user_design_df/modules/start/pages/start_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:redux/redux.dart';
 
 enum AppRoutes {
   startApp,
@@ -18,7 +20,7 @@ enum AppRoutes {
   homeRickMorty,
 }
 
-final useBloc = locator<StartAppCubit>();
+final useBloc = locator<Store<StartAppState>>();
 
 final List<String> routesWithAuth = [
   '/home',
@@ -30,12 +32,13 @@ final List<String> routesWithoutAuth = ['/login'];
 
 final goRouterConfiguration = GoRouter(
   debugLogDiagnostics: true,
-  refreshListenable: GoRouterRefreshStream(useBloc.stream),
+  refreshListenable: GoRouterRefreshStream(startUpStore),
   redirect: (context, state) {
-    if (useBloc.state.isLogged == false &&
+    final isLogged = startUpStore.state.isLogged;
+    if (isLogged == false &&
         !routesWithoutAuth.contains(state.matchedLocation)) {
       return '/login';
-    } else if (useBloc.state.isLogged == true &&
+    } else if (isLogged == true &&
         !routesWithAuth.contains(state.matchedLocation)) {
       return '/homeRickMorty';
     }
@@ -80,13 +83,12 @@ final goRouterConfiguration = GoRouter(
 );
 
 class GoRouterRefreshStream extends ChangeNotifier {
-  GoRouterRefreshStream(Stream<dynamic> stream) {
-    notifyListeners();
-    _subscription = stream.asBroadcastStream().listen(
-          (dynamic _) => notifyListeners(),
-        );
-  }
   late final StreamSubscription<dynamic> _subscription;
+  GoRouterRefreshStream(Store<StartAppState> store) {
+    _subscription = store.onChange.listen((_) {
+      notifyListeners();
+    });
+  }
 
   @override
   void dispose() {

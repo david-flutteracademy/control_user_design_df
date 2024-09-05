@@ -1,7 +1,9 @@
 import 'package:control_user_design_df/core/locator/locator.dart';
 import 'package:control_user_design_df/core/routes/app_router.dart';
+import 'package:control_user_design_df/core/store/sotore_redux.dart';
 import 'package:control_user_design_df/modules/home/pages/home_details_page.dart';
 import 'package:control_user_design_df/modules/start/cubits/start_app_cubit.dart';
+import 'package:control_user_design_df/modules/start/redux/start_app_actions.dart';
 import 'package:control_user_design_df/utils/form_validators.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +55,15 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    locator<StartAppCubit>().signInWithEmail(
+                    // locator<StartAppCubit>().signInWithEmail(
+                    //   email: emailController.text,
+                    //   password: passwordController.text,
+                    // );
+
+                    startUpStore.dispatch(SignInWithEmailAction(
                       email: emailController.text,
                       password: passwordController.text,
-                    );
+                    ));
                   }
 
                   // context.goNamed(
